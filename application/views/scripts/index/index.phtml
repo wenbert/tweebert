@@ -1,0 +1,28 @@
+<?php if(!isset($this->twitterAuth->username)):?>
+<p class="normal_text">
+    <a href="<?=$this->baseUrl()?>/login" style="font-weight: bold; font-size: 14px;">
+        Click here to access your account through Twitter.
+    </a>
+</p>
+<!--
+<div class="login_form">
+    <form method="POST" action="<?php echo $this->baseUrl(); ?>/login/authenticate">
+        Twitter username: <input type="text" name="twitter_username"><br/>
+        Twitter password: <input type="password" name="twitter_password"><br/>
+        Tweets to load: 
+        <select name="twitter_load">
+            <?php for($i=20;$i<=200;$i=$i+20):?>
+                <option value="<?php echo $i?>"><?php echo $i?> tweets</option>
+            <?php endfor;?>
+        </select><br/>
+        <input type="submit" value="Login Now"><br/>
+    </form>
+</div>
+-->
+<p class="normal_text">
+We use <a href="http://oauth.net/">Oauth</a>.
+</p>
+<?php endif;?>
+<p class="normal_text">
+Click here for the <a href="<?php echo $this->baseUrl(); ?>/timeline">timeline</a>.
+</p>

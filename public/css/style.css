@@ -1,0 +1,213 @@
+* {
+	font-family:'Lucida Grande',sans-serif;
+	font-size: 12px;
+	color: #000000;
+}
+
+.navigation {
+	font:11px 'Lucida Grande',sans-serif;
+	font-size: 12px;
+}
+
+.navigation a {
+	color: #78CD0A;
+	text-decoration: none;
+}
+
+.navigation a:hover {
+	color: #8A64AB;
+	text-decoration: underline;
+}
+
+.navigation ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.navigation ul li {
+	display: inline; 
+	margin-right: 15px;
+}
+
+.timeline {
+	width: 300px; 
+	display:block;
+	float:left;
+	font:11px 'Lucida Grande',sans-serif;
+	font-size: 12px;
+}
+
+.timeline ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.user_details {
+	font:11px 'Lucida Grande',sans-serif;
+}
+
+.user_meta {
+	font-family:'Lucida Grande',sans-serif;
+	font-size: 10px;
+	color: #cccccc;
+}
+
+.status_box {
+	font:11px 'Lucida Grande',sans-serif;
+	font-size: 12px;
+	width: 300px;
+	height: 40px;
+	padding: 3px;
+}
+
+.current_status {
+	font-weight: bold;
+	font:14 px 'Lucida Grande',sans-serif;
+	color: #909090;
+}
+
+.normal_text {
+	font-family:'Lucida Grande',sans-serif;
+	color: #909090;
+	font-size: 11px ;
+}
+
+.normal_text a {
+	color: #78CD0A;
+	text-decoration: none;
+}
+
+.normal_text a:hover {
+	color: #8A64AB;
+	text-decoration: underline;
+}
+
+.normal_text ul {
+
+}
+
+ul li {
+	font:11px 'Lucida Grande',sans-serif;
+}
+
+.login_form {
+	font:11px 'Lucida Grande',sans-serif;
+	color: #909090;
+	font-size: 12px;
+}
+
+.group_box {
+	background-color: #E6E6E6;
+	border: 1px solid #6B6B6B;
+	padding: 5px;
+	margin: 5px;
+}
+
+.flash_messages {
+	background-color: #D49D3F;
+	border: 1px solid #8D4E40;
+	padding: 3px;
+	width: 400px;
+	margin:auto;
+	text-align: center;
+	font:11px 'Lucida Grande',sans-serif;
+	font-size: 12px;
+}
+
+.footer {
+	color: #909090;
+	clear:both;
+	display: block;
+	text-align: center;
+	font:11px 'Lucida Grande',sans-serif;
+	font-size: 10px;
+}
+
+.group_box {
+	float: left;
+	margin: 5px;
+	padding: 3px;
+	border: 1px solid #CCCCCC;
+}
+
+.group_box textarea {
+	height: 100px;
+	width: 250px;
+}
+
+.atuser {
+	color: #C84E00;
+	font-weight:bold;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.atuser:hover {
+	text-decoration: underline;
+}
+
+.tweetlink {
+	color: #3A88C6;
+	text-decoration: none;
+}
+
+.tweetlink:hover {
+	text-decoration: underline;
+}
+
+.tweetmeta {
+	color: #999999; 
+	clear:both;
+	font-size: 9px;
+}
+
+.tweetitems li {
+	clear:both; 
+	margin: 3px; 
+	padding-bottom: 3px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.tweetitems li:hover {
+	background-color:#F2F1F1;
+}
+
+.tweetitem {
+	clear:both; 
+	margin: 3px; 
+	padding-bottom: 3px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.tweetitem:hover {
+	background-color:#F2F1F1;
+}
+
+.tweetedby {
+	color: #30AA00;
+	font-weight:bold;
+	cursor: pointer;
+}
+
+.char_count {
+	margin: 3px;
+	font-size: 14px;
+	color: #909090;
+}
+
+.char_count_red {
+	margin: 3px;
+	color: #CE460C;
+	font-size: 14px;
+}
+
+.tweet_is_read {
+	background-image: url('./images/heart-small-empty.png');
+
+}
+.tweet_is_unread {
+	background-image: url('./images/heart-small.png');
+	/*background-color: #f0ffef;*/
+}

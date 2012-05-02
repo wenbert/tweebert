@@ -1,0 +1,72 @@
+<?php
+// application/layouts/scripts/layout.phtml
+
+echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>My Twitter App</title>
+    <link type="text/css" href="<?php echo $this->baseUrl() ?>/css/ui-lightness/jquery-ui-1.7.2.custom.css" rel="Stylesheet" />
+    <link type="text/css" href="<?php echo $this->baseUrl() ?>/css/style.css" rel="Stylesheet" />
+    <script type="text/javascript" src="<?php echo $this->baseUrl() ?>/js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl() ?>/js/jquery-ui-1.7.2.custom.min.js"></script>
+</head>
+<body>
+<img src="<?php echo $this->baseUrl()?>/images/logo_small.jpg">
+<p class="normal_text">
+<b>Not even Beta. But usable :P Send feedback to wenbert[AT]ekini.net</b><br/>
+<u>Group the people you are following.</u>
+</p>
+<?php
+//$twitterAuth = new Zend_Session_Namespace('Twitter_Auth');
+//if(isset($twitterAuth->username)) :
+$oauth = new Zend_Session_Namespace('Twitter_Oauth');
+$token = unserialize($oauth->twitter_access_token);
+if(isset($oauth->twitter_access_token)) :
+?>
+<div class="navigation">
+    <ul>
+        <li>
+            <a href="http://twitter.com/<?php echo $token->screen_name?>"><?php echo $token->screen_name?></a>
+        </li>
+        <li>
+            <a href="<?php echo $this->baseUrl() ?>/timeline/index">Timeline</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->baseUrl() ?>/group/add">Create New Group</a>
+        </li>
+        <li>
+            <a href="<?php echo $this->baseUrl() ?>/group/edit">Edit Groups</a>
+        </li>
+        <!--
+        <li>
+            <a href="<?php echo $this->baseUrl() ?>/login/logout">Logout</a>
+        </li>
+        -->
+        <li>
+            <a href="<?php echo $this->baseUrl() ?>/login/clearoauth">Logout</a>
+        </li>
+    </ul>
+</div>
+<?php
+endif;
+?>
+    <?php
+    if(count($this->messages)) {
+        echo '<div class="flash_messages">';
+        foreach($this->messages AS $key=>$row) {
+            echo $row.'<br/>';
+        }
+        echo '</div>';
+    }
+    ?>
+    <?php echo $this->layout()->content ?>
+
+    <div class="footer">
+        &copy; Copyright 2009. Created by <a href="http://blog.ekini.net">Wenbert Del Rosario</a>.
+        <br/>
+        DISCLAIMER: Under development. Use at your own risk. I will be cleaning the database from time to time.
+        <br/>
+    </div>
+</body>
+</html>

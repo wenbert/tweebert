@@ -1,0 +1,117 @@
+<form method="POST" action="<?php echo $this->baseUrl(); ?>/timeline/update" >
+<table>
+    <tr>
+        <td valign="top">
+            <img src="<?php echo $this->account->profile_image_url ?>" align="left">
+        </td>
+        <td valign="top">
+            <textarea class="status_box" id="status_box" name="status"></textarea>
+        </td>
+        <td valing="top">
+            <input type="submit" id="submit_tweet" value="Send Tweet Now!">
+            <div id="char_count" class="char_count">140</div>
+        </td>
+    </tr>
+</table>
+</form>
+
+<div class="current_status"><?php echo $this->account->status->text?></div>
+
+<div class="user_meta">
+    Updated from <?php echo $this->account->status->source?> on 
+    <?php echo $this->account->status->created_at?>
+    <?php
+        if(count($this->account->status->in_reply_to_status_id)>1) {
+            echo ' in reply to: '.$this->account->status->in_reply_to_status_id.' ';
+            echo ' by '.$this->account->status->in_reply_to_screen_name;
+        }
+    ?>
+    
+    <?php if(!$this->rateLimitStatus->error):?>
+        Remaining hits: <?php echo $this->rateLimitStatus->{'remaining-hits'}; ?> 
+        Hourly Limit: <?php echo $this->rateLimitStatus->{'hourly-limit'}; ?>
+        Reset On: <?php echo date('h:i:s A',strtotime($this->rateLimitStatus->{'reset-time'})); ?>
+    <?php else:?>
+        <?php echo $this->rateLimitStatus->error; ?>
+    <?php endif;?>
+</div>
+
+<form method="POST" action="<?php echo $this->baseUrl() ?>/group/savefriends">
+    <div class="timeline">
+        <h2>My Timeline</h2>
+        <ul class="tweetitems">
+        <?php
+            foreach($this->friendsTimeline AS $key=>$row) {
+                echo '<li>';
+                //echo '<li class="'.$this->readify($row->created_at).'">';
+                echo '<img style="margin: 3px;" src="'.$row->user->profile_image_url.'" align="left"/>';
+                echo $this->linkify($row->text).'';
+                echo '<div class="tweetmeta"> ';
+                echo $this->heartify($this->readify($row->created_at));
+                echo '<a href="http://www.twitter.com/'.$row->user->screen_name.'">';
+                echo '<img src="'.$this->baseUrl().'/images/user-thief.png" valign="absmiddle"/>';
+                echo '</a>';
+                echo $this->timefy($row->created_at);
+                echo '</div>';
+                echo '<div class="tweetmeta"> ';
+                echo '<input type="checkbox" name="twitter_names[]" value="'.$row->user->screen_name.'">';
+                echo '<span class="tweetedby">'.$row->user->screen_name;
+                echo '</span> ';
+                echo ' ('.$row->user->id.')';
+                echo '</div>';
+                echo '</li>';
+            }
+        ?>
+        </ul>
+        
+        <div class="group_box">
+            <?php if(count($this->groups)) : ?>
+                <b>Add Twitterers to a Group</b>
+                <select name="group_id">
+                    <?php foreach($this->groups AS $row) : ?>
+                        <option value="<?php echo $row->id?>">
+                            <?php echo $row->group_name?>
+                        </option>
+                    <?php endforeach;?>
+                    </select>
+                <input type="submit" value="Add Selected Twitterers to Group">
+                <br/>
+                <a href="<?php echo $this->baseUrl() ?>/group/edit">Edit Groups</a>
+            <?php else: ?>
+                <p class="normal_text">You have not create a group yet. Click <a href="<?php echo $this->baseUrl() ?>/group/add">here</a> to create a group.</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <?php $this->groupify($this->groups, $this->groupData, $this->friendsTimeline)?>
+    
+    <?php 
+    $twitterAuth = new Zend_Session_Namespace('Twitter_Auth');
+    //IMPORTANT TO SETCOOKIE AFTER THE NEW/OLD MESSAGES CHECKING
+    setcookie($twitterAuth->twitter_id.'[timestamp]', time());
+    ?>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var clicked_name = '';
+        $(".tweetedby").click(function() {
+            clicked_name = '@'+$(this).html();
+            $('#status_box').val($('#status_box').val()+clicked_name);
+        });
+        
+        $('#status_box').keyup(function() {
+            var charLength = $(this).val().length;
+            $('#char_count').html(140 - charLength);
+            if(charLength > 140) {
+                $('#char_count').removeClass('char_count');
+                $('#char_count').addClass('char_count_red');
+                $('#submit_tweet').attr('disabled','disabled');
+            } else {
+                $('#char_count').removeClass('char_count_red');
+                $('#char_count').addClass('char_count');
+                $('#submit_tweet').removeAttr('disabled');
+            }
+        });
+    });
+</script>
